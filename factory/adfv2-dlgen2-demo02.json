@@ -1,0 +1,9 @@
+{
+	"name": "adfv2-dlgen2-demo02",
+	"location": "switzerlandnorth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "724ef581-e4d8-432c-ba61-f98b00d68afd",
+		"tenantId": "353dfd4f-e9cd-4ae0-93cb-16882ec5ed67"
+	}
+}
