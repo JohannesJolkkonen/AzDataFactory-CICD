@@ -28,7 +28,7 @@ parameters:
 - name: ADF_LOCATION
   displayName: Azure Region/Location
   type: string
-  default: 'NorthSwitzerland'
+  default: 'switzerlandnorth'
 
 - name: ADF_RESOURCE_GROUP_NAME
   displayName: Azure Resource Group
