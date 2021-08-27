@@ -1,6 +1,7 @@
 ## Continuous Integration & Development with Azure Data Factory
 
-Project based on [Microsoft docs](https://docs.microsoft.com/en-us/azure/data-factory/continuous-integration-deployment) and Adam Paternostro's [guide](https://github.com/AdamPaternostro/Azure-Data-Factory-CI-CD-Source-Control)
+Practicing setting up a CI/CD data pipeline with ADF and Azure DevOps.
+Project is based on [Microsoft docs](https://docs.microsoft.com/en-us/azure/data-factory/continuous-integration-deployment) and Adam Paternostro's [guide](https://github.com/AdamPaternostro/Azure-Data-Factory-CI-CD-Source-Control)
 
 ## Highlighted Features
 - Setting up a Git-repository and managing feature branches in the ADF UI. 
