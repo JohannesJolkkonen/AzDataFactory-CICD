@@ -43,7 +43,7 @@ parameters:
 - name: RESOURCE_MANAGER_CONNECTION
   displayName: Azure Resource Connection Name
   type: string
-  default: 'Microsoft Azure Adam Paternostro(00000000-0000-0000-0000-000000000000)'
+  default: 'AzRMConnection'
 
 stages:
 #############################################################
@@ -68,7 +68,7 @@ stages:
       - task: PublishBuildArtifacts@1
         displayName: 'Publish: PowerShell-Scripts'
         inputs:
-          PathtoPublish: '$(Build.Repository.LocalPath)/PowerShell-Scripts'
+          PathtoPublish: '$(Build.Repository.LocalPath)/PS-Scripts'
           ArtifactName: PowerShell-Scripts
 
       # Change branches
