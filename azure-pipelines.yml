@@ -23,7 +23,7 @@ parameters:
 - name: ADF_PUBLISH_FOLDER
   displayName: ADF Publish Folder Name in Git
   type: string
-  default: 'adfv2-adlgen2-demo02-Feature-A'
+  default: 'adfv2-adlgen2-Feature-A'
 
 - name: ADF_LOCATION
   displayName: Azure Region/Location
