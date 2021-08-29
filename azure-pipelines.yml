@@ -18,32 +18,32 @@ parameters:
 - name: ADF_NAME
   displayName: ADF Name
   type: string
-  default: 'adfv2-adlgen2-demo02-Feature-A-QA'
+  default: 'ADF-MyADFProject-{REPLACE-ME e.g.Feature-A-QA}'
 
 - name: ADF_PUBLISH_FOLDER
   displayName: ADF Publish Folder Name in Git
   type: string
-  default: 'adfv2-adlgen2-Feature-A'
+  default: 'ADF-MyADFProject-{REPLACE-ME e.g. Feature-A}'
 
 - name: ADF_LOCATION
   displayName: Azure Region/Location
   type: string
-  default: 'switzerlandnorth'
+  default: 'SouthCentralUS'
 
 - name: ADF_RESOURCE_GROUP_NAME
   displayName: Azure Resource Group
   type: string
-  default: 'DatalakeDemoRG'
+  default: 'ADF-Dev-Ops'
 
 - name: SUBSCRIPTION_ID
   displayName: Azure Subscription Id
   type: string
-  default: '94481dd1-83e3-45b6-b429-59d024a96b3f'
+  default: '00000000-0000-0000-0000-000000000000'
   
 - name: RESOURCE_MANAGER_CONNECTION
   displayName: Azure Resource Connection Name
   type: string
-  default: 'AzRMConnection'
+  default: 'Microsoft Azure Adam Paternostro(00000000-0000-0000-0000-000000000000)'
 
 stages:
 #############################################################
@@ -68,7 +68,7 @@ stages:
       - task: PublishBuildArtifacts@1
         displayName: 'Publish: PowerShell-Scripts'
         inputs:
-          PathtoPublish: '$(Build.Repository.LocalPath)/PS-Scripts'
+          PathtoPublish: '$(Build.Repository.LocalPath)/PowerShell-Scripts'
           ArtifactName: PowerShell-Scripts
 
       # Change branches
@@ -134,7 +134,7 @@ stages:
               inputs:
                 azureSubscription: ${{ parameters.RESOURCE_MANAGER_CONNECTION }}
                 ScriptType: 'FilePath'
-                ScriptPath: '$(Pipeline.Workspace)/PS-Scripts/Deploy-ADF.ps1'
+                ScriptPath: '$(Pipeline.Workspace)/PowerShell-Scripts/Deploy-ADF.ps1'
                 ScriptArguments: '-ResourceGroupName ${{ parameters.ADF_RESOURCE_GROUP_NAME }} -DataFactoryName ${{ parameters.ADF_NAME }} -predeployment $true -deleteDeployment $false -armTemplate $(Pipeline.Workspace)/Publish-Files/ARMTemplateForFactory.json'
                 azurePowerShellVersion: LatestVersion
                 
@@ -160,6 +160,6 @@ stages:
               inputs:
                 azureSubscription: ${{ parameters.RESOURCE_MANAGER_CONNECTION }}
                 ScriptType: 'FilePath'
-                ScriptPath: '$(Pipeline.Workspace)/PS-Scripts/Deploy-ADF.ps1'
+                ScriptPath: '$(Pipeline.Workspace)/PowerShell-Scripts/Deploy-ADF.ps1'
                 ScriptArguments: '-ResourceGroupName ${{ parameters.ADF_RESOURCE_GROUP_NAME }} -DataFactoryName ${{ parameters.ADF_NAME }} -predeployment $false -deleteDeployment $true -armTemplate $(Pipeline.Workspace)/Publish-Files/ARMTemplateForFactory.json'
                 azurePowerShellVersion: LatestVersion
