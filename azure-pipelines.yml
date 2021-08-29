@@ -18,32 +18,32 @@ parameters:
 - name: ADF_NAME
   displayName: ADF Name
   type: string
-  default: 'ADF-MyADFProject-{REPLACE-ME e.g.Feature-A-QA}'
+  default: 'adfv2-adlgen2-demo02-Feature-A-QA'
 
 - name: ADF_PUBLISH_FOLDER
   displayName: ADF Publish Folder Name in Git
   type: string
-  default: 'ADF-MyADFProject-{REPLACE-ME e.g. Feature-A}'
+  default: 'adfv2-adlgen2-Feature-A'
 
 - name: ADF_LOCATION
   displayName: Azure Region/Location
   type: string
-  default: 'SouthCentralUS'
+  default: 'SwitzerlandNorth'
 
 - name: ADF_RESOURCE_GROUP_NAME
   displayName: Azure Resource Group
   type: string
-  default: 'ADF-Dev-Ops'
+  default: 'DatalakeDemoRG'
 
 - name: SUBSCRIPTION_ID
   displayName: Azure Subscription Id
   type: string
-  default: '00000000-0000-0000-0000-000000000000'
+  default: '94481dd1-83e3-45b6-b429-59d024a96b3f'
   
 - name: RESOURCE_MANAGER_CONNECTION
   displayName: Azure Resource Connection Name
   type: string
-  default: 'Microsoft Azure Adam Paternostro(00000000-0000-0000-0000-000000000000)'
+  default: 'AzRMConnection'
 
 stages:
 #############################################################
