@@ -59,7 +59,7 @@ stages:
         action: 'Create Or Update Resource Group'
         resourceGroupName: DatalakeDemoRG
         location: 'SwitzerlandNorth'
-        csmFile: 'MyDevOps-Master/ARMTemplateForFactory.json'
-        csmParametersFile: 'MyDevOps-Master/ARMTemplateParametersForFactory.json'
+        csmFile: '$(Pipeline.Workspace)/Deploy-Files/ARMTemplateForFactory.json'
+        csmParametersFile: '$(Pipeline.Workspace)/Deploy-Files/ARMTemplateParametersForFactory.json'
         overrideParameters: '-name ${{ parameters.ADF_Name }}'
         deploymentMode: 'Incremental'
