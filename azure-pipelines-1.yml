@@ -68,7 +68,7 @@ stages:
         templateLocation: 'Linked artifact'
         csmFile: '$(Pipeline.Workspace)/ARM-Templates/Create-ADF-Template.json'
         csmParametersFile: '$(Pipeline.Workspace)/ARM-Templates/Create-ADF-Parameters.json'
-        overrideParameters: '-name ${{ parameters.ADF_Name }}'
+        overrideParameters: '-name ${{ parameters.ADF_Name }} -location SwitzerlandNorth -apiVersion 2018-06-01'
         deploymentMode: 'Incremental'
 
         
