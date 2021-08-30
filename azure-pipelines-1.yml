@@ -1,0 +1,28 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+parameters:
+- name: ADF_NAME
+  displayName: ADF Name
+  type: string
+  default: 'MyDevOps-QA'
+
+pool:
+  name: Azure Pipelines
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  displayName: 'ARM Template deployment: Resource Group scope'
+  inputs:
+    azureResourceManagerConnection: AzRMConnection
+    subscriptionId: '94481dd1-83e3-45b6-b429-59d024a96b3f'
+    resourceGroupName: DatalakeDemoRG
+    location: 'Switzerland North'
+    csmFile: 'MyDevOps-Master/ARMTemplateForFactory.json'
+    csmParametersFile: 'MyDevOps-Master/ARMTemplateParametersForFactory.json'
+    overrideParameters: 'name ${{ parameters.ADF_Name }}'
+    deploymentMode: 'Incremental'
