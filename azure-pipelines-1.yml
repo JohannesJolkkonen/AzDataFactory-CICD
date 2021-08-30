@@ -23,5 +23,5 @@ steps:
     location: 'Switzerland North'
     csmFile: 'MyDevOps-Master/ARMTemplateForFactory.json'
     csmParametersFile: 'MyDevOps-Master/ARMTemplateParametersForFactory.json'
-    overrideParameters: 'name ${{ parameters.ADF_Name }}'
+    overrideParameters: '-name ${{ parameters.ADF_Name }}'
     deploymentMode: 'Incremental'
