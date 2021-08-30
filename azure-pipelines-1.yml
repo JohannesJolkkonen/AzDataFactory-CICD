@@ -27,21 +27,27 @@ stages:
     pool:
       vmImage: 'ubuntu-latest'
     steps:
-    # Change branches
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish: ARM-Templates'
+      inputs:
+        PathtoPublish: '$(Build.Repository.LocalPath)/ARM-Templates'
+        ArtifactName: ARM-Templates
+    
+    #Change branches to adf_publish
     - task: Bash@3
       inputs:
         targetType: 'inline'
         script: |
           git checkout adf_publish
     - task: PublishBuildArtifacts@1
-      displayName: 'Deploy: Deploy-Files'
+      displayName: 'Deploy: Publish-Files'
       inputs:
        PathtoPublish: '$(Build.Repository.LocalPath)/${{ parameters.ADF_PUBLISH_FOLDER }}'
-       ArtifactName: Deploy-Files
+       ArtifactName: Publish-Files
 
-#####################
-# Deploy ARM Template
-#####################
+######################
+# Deploy ARM Templates
+######################
 - stage: Deploy
   jobs:
   - job: DeployADF
@@ -51,7 +57,7 @@ stages:
     
     steps:
     - task: AzureResourceManagerTemplateDeployment@3
-      displayName: 'ARM Template deployment: Resource Group scope'
+      displayName: Creating Azure ADF
       inputs:
         deploymentScope: 'Resource Group'
         azureResourceManagerConnection: AzRMConnection
@@ -59,6 +65,23 @@ stages:
         action: 'Create Or Update Resource Group'
         resourceGroupName: DatalakeDemoRG
         location: 'SwitzerlandNorth'
+        templateLocation: 'Linked artifact'
+        csmFile: '$(Pipeline.Workspace)/ARM-Templates/Create-ADF-Template.json'
+        csmParametersFile: '$(Pipeline.Workspace)/ARM-Templates/Create-ADF-Parameters.json'
+        overrideParameters: '-name ${{ parameters.ADF_Name }}'
+        deploymentMode: 'Incremental'
+
+        
+    - task: AzureResourceManagerTemplateDeployment@3
+      displayName: 'Deploy ADF Pipelines'
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: AzRMConnection
+        subscriptionId: '94481dd1-83e3-45b6-b429-59d024a96b3f'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: DatalakeDemoRG
+        location: 'SwitzerlandNorth'
+        templateLocation: 'Linked artifact'
         csmFile: '$(Pipeline.Workspace)/Deploy-Files/ARMTemplateForFactory.json'
         csmParametersFile: '$(Pipeline.Workspace)/Deploy-Files/ARMTemplateParametersForFactory.json'
         overrideParameters: '-factoryName ${{ parameters.ADF_Name }}'
