@@ -12,7 +12,7 @@ parameters:
   default: 'MyDevOps-QA'
 
 pool:
-  name: Azure Pipelines
+  vmImage: 'ubuntu-latest' 
 steps:
 - task: AzureResourceManagerTemplateDeployment@3
   displayName: 'ARM Template deployment: Resource Group scope'
