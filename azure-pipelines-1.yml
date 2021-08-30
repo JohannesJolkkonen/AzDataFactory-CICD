@@ -11,8 +11,34 @@ parameters:
   type: string
   default: 'MyDevOps-QA'
 
+- name: ADF_PUBLISH_FOLDER
+  displayName: ADF Publish Folder
+  type: string
+  default: '000-000'
 
 stages:
+#####################
+# Package the deployment files
+#####################
+- stage: Build
+  jobs: 
+  - job: JobBuild
+    displayName: 'Job Build'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    # Change branches
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          git checkout adf_publish
+    - task: PublishBuildArtifacts@1
+      displayName: 'Deploy: Deploy-Files'
+      inputs:
+       PathtoPublish: '$(Build.Repository.LocalPath)/${{ parameters.ADF_PUBLISH_FOLDER }}'
+       ArtifactName: Deploy-Files
+
 #####################
 # Deploy ARM Template
 #####################
