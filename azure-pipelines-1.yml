@@ -61,5 +61,5 @@ stages:
         location: 'SwitzerlandNorth'
         csmFile: '$(Pipeline.Workspace)/Deploy-Files/ARMTemplateForFactory.json'
         csmParametersFile: '$(Pipeline.Workspace)/Deploy-Files/ARMTemplateParametersForFactory.json'
-        overrideParameters: '-name ${{ parameters.ADF_Name }}'
+        overrideParameters: '-factoryName ${{ parameters.ADF_Name }}'
         deploymentMode: 'Incremental'
