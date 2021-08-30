@@ -11,17 +11,29 @@ parameters:
   type: string
   default: 'MyDevOps-QA'
 
-pool:
-  vmImage: 'ubuntu-latest' 
-steps:
-- task: AzureResourceManagerTemplateDeployment@3
-  displayName: 'ARM Template deployment: Resource Group scope'
-  inputs:
-    azureResourceManagerConnection: AzRMConnection
-    subscriptionId: '94481dd1-83e3-45b6-b429-59d024a96b3f'
-    resourceGroupName: DatalakeDemoRG
-    location: 'Switzerland North'
-    csmFile: 'MyDevOps-Master/ARMTemplateForFactory.json'
-    csmParametersFile: 'MyDevOps-Master/ARMTemplateParametersForFactory.json'
-    overrideParameters: '-name ${{ parameters.ADF_Name }}'
-    deploymentMode: 'Incremental'
+
+stages:
+#####################
+# Deploy ARM Template
+#####################
+- stage: Deploy
+  jobs:
+  - job: DeployADF
+    displayName: Deploy ADF
+    pool:
+      vmImage: 'ubuntu-latest' 
+    
+    steps:
+    - task: AzureResourceManagerTemplateDeployment@3
+      displayName: 'ARM Template deployment: Resource Group scope'
+      inputs:
+        deploymentScope: 'Resource Group'
+        azureResourceManagerConnection: AzRMConnection
+        subscriptionId: '94481dd1-83e3-45b6-b429-59d024a96b3f'
+        action: 'Create Or Update Resource Group'
+        resourceGroupName: DatalakeDemoRG
+        location: 'SwitzerlandNorth'
+        csmFile: 'MyDevOps-Master/ARMTemplateForFactory.json'
+        csmParametersFile: 'MyDevOps-Master/ARMTemplateParametersForFactory.json'
+        overrideParameters: '-name ${{ parameters.ADF_Name }}'
+        deploymentMode: 'Incremental'
