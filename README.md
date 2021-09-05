@@ -5,8 +5,8 @@ Project is based on [Microsoft docs](https://docs.microsoft.com/en-us/azure/data
 
 ## Highlighted Features
 - Setting up a Git-repository and managing feature branches in the ADF UI. 
-- Deploying datafactories to QA- and Production-environments using a Azure DevOps pipeline.
-- DevOps pipeline includes running Powershell-scripts to disable/enable ADF-pipeline triggers, so that any updates to them can be properly applied 
+- Deploying datafactories to QA- and Production-environments using an Azure DevOps pipeline, which loads ARM-templates from the *adf_publish*-branch for deployment.
+- DevOps pipeline also includes running Powershell-scripts to disable/enable ADF-pipeline triggers, so that any updates to them can be properly applied.
 ## Development Notes
 - Ran into an issue while running Azure DevOps Pipeline, <span style="color:#DC2F3F">"No hosted parallelism has been purchased or granted"</span>, although the pipeline only involves sequential jobs. This seems to be caused by a recent policy change to the DevOps free tier, which now requires a request to be submitted before any jobs can be run. See [these](https://stackoverflow.com/questions/68405027/how-to-resolve-no-hosted-parallelism-has-been-purchased-or-granted-in-free-tie) [threads](https://docs.microsoft.com/en-us/answers/questions/477716/how-to-resolve-34no-hosted-parallelism-has-been-pu.html) for more info. 
 
